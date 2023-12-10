@@ -61,7 +61,59 @@ function registerUser(userEmail, userName, userType, password) {
   });
 }
 
+function detailed() {
+  return new Promise((resolve, reject) => {
+    const tableName = "users";
+    const query = `SELECT * FROM ${tableName}`;
+
+    connection.query(query, (queryErr, results) => {
+      if (queryErr) {
+        console.error("Error executing query:", queryErr);
+        reject(queryErr);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
+function DeteleUser(email) {
+  return new Promise((resolve, reject) => {
+    const query = "DELETE FROM `users` WHERE email = ?";
+    connection.query(query, [email], (err, result) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
+function AddUserType(email) {
+  return new Promise((resolve, reject) => {
+    const tableName = "users";
+    const updateQuery = `
+    UPDATE ${tableName}
+    SET user_type = 1
+    WHERE email = ?;
+  `;
+    connection.query(updateQuery, [email], (queryErr, results) => {
+      if (queryErr) {
+        console.error("Error executing update query:", queryErr);
+        reject(queryErr);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
 module.exports = {
   findUserByEmail,
   registerUser,
+  detailed,
+  DeteleUser,
+  AddUserType,
 };

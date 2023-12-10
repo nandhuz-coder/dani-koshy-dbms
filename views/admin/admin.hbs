@@ -1,3 +1,16 @@
 <body>
-  Admin site
+  <link rel="stylesheet" href="/stylesheets/admin.css" />
+  <header class="head">
+    <h1>{{user}}</h1><span>ADMIN</span>
+    <nav>
+      <a href="" class="btn1 active">Products</a>
+      <a href="" class="btn1">wallet</a>
+      <a href="" class="btn1">Stocks</a>
+      <a href="/logout" class="btn1">logout</a>
+    </nav>
+  </header>
+  <div class="container">
+    <a href="/admin/add-products">
+      <button class="btn2" onclick="/admin/add-products">ADD PRODUCTS</button></a>
+  </div>
 </body>

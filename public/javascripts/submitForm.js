@@ -8,8 +8,8 @@ $(document).ready(function () {
       url: "/register",
       data: formData,
       success: function (response) {
-        if (!response.message) return;
-        alert(response.message);
+        if (!response.message) location.reload();
+        else alert(response.message);
       },
       error: function () {
         alert("Error: Unable to submit the form.");

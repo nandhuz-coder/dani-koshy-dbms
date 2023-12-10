@@ -1,3 +1,48 @@
 <body>
-  dev page
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link rel="stylesheet" href="/stylesheets/dev.css" />
+  <script src="/javascripts/moderationuser.js"></script>
+  <header class="head">
+    <h1>{{user}}</h1><span>DEV</span>
+    <nav>
+      <a href="" class="btn1 active">USERS</a>
+      <a href="/logout" class="btn1">logout</a>
+    </nav>
+  </header>
+  <div class="container">
+    <table class="tb">
+      <thead>
+        <tr>
+          <th>SL No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>User Type</th>
+          <th>Moderation</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each result}}
+          <tr>
+            <td>{{this.slNo}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.user_type}}</td>
+            <td>
+              {{#if this.user}}
+                <button class="btn2" onclick="adduser(`{{this.email}}`)">
+                  Add to admin</button>
+                <button class="btn2" onclick="deleteuser('{{this.email}}')">
+                  Remove user</button>
+              {{else if this.admin}}
+                <button class="btn2" onclick="deleteuser('{{this.email}}')">
+                  Remove user</button>
+              {{else}}
+                NO MODERATION AVAILABLE
+              {{/if}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 </body>
