@@ -9,8 +9,43 @@
       <a href="/logout" class="btn1">logout</a>
     </nav>
   </header>
-  <div class="container">
-    <a href="/admin/add-products">
-      <button class="btn2" onclick="/admin/add-products">ADD PRODUCTS</button></a>
+  <div class="product-list-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Sl</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Quantity</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products}}
+          <tr>
+            <td>{{this.sl}}</td>
+            <td>{{this.name}}</td>
+            <td>${{this.price}}</td>
+            <td><img
+                src="{{this.Image}}"
+                alt="{{this.name}} Image"
+                class="product-image"
+              /></td>
+            <td>{{this.quantity}}</td>
+            <td>
+              <a href="" class="btn2">Remove</a>
+            </td>
+          </tr>
+        {{/each}}
+        <tr><td></td><td></td><td></td><td></td><td></td><td>
+            <div class="btn-div">
+              <a href="/admin/add-products">
+                <button class="btn2" onclick="/admin/add-products">ADD PRODUCTS</button>
+              </a>
+            </div>
+          </td></tr>
+      </tbody>
+    </table>
   </div>
 </body>

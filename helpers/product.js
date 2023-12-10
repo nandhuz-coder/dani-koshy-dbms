@@ -4,13 +4,12 @@ const connection = Db;
 function addProducts(insertValues) {
   return new Promise((resolve, reject) => {
     const insertQuery =
-      "INSERT INTO products (name, price, image) VALUES (?, ?, ?)";
+      "INSERT INTO products (name, price, image, quantity) VALUES (?, ?, ?, ?)";
     connection.query(insertQuery, insertValues, (queryErr, results) => {
       if (queryErr) {
         console.error("Error inserting product:", queryErr);
         reject(queryErr);
       } else {
-        console.log(results);
         resolve(results);
       }
     });
@@ -30,7 +29,24 @@ function takeProduct(productId) {
   });
 }
 
+function ProductDetailed() {
+  return new Promise((resolve, reject) => {
+    const tableName = "products";
+    const query = `SELECT * FROM ${tableName}`;
+
+    connection.query(query, (queryErr, results) => {
+      if (queryErr) {
+        console.error("Error executing query:", queryErr);
+        reject(queryErr);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
 module.exports = {
   addProducts,
   takeProduct,
+  ProductDetailed,
 };
