@@ -45,8 +45,23 @@ function ProductDetailed() {
   });
 }
 
+function DeteleProduct(email) {
+  return new Promise((resolve, reject) => {
+    const query = "DELETE FROM `products` WHERE id = ?";
+    connection.query(query, [email], (err, result) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
 module.exports = {
   addProducts,
   takeProduct,
   ProductDetailed,
+  DeteleProduct,
 };

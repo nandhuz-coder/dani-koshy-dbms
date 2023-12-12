@@ -3,8 +3,12 @@ const Ifuser = require("../middleware/ifUser");
 const IfAdmin = require("../middleware/ifAdmin");
 const { findUserByEmail } = require("../helpers/usermodule");
 const multer = require("multer");
-const { addProducts, ProductDetailed } = require("../helpers/product");
-const storage = multer.memoryStorage(); // Store the file in memory
+const {
+  addProducts,
+  ProductDetailed,
+  DeteleProduct,
+} = require("../helpers/product");
+const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 var router = express.Router();
 
@@ -41,7 +45,6 @@ router.post("/add-products", upload.single("productImage"), (req, res) => {
   const productPrice = req.body.productPrice;
   const productQuantity = req.body.quantity;
   const productImage = req.file.buffer;
-  console.log(productQuantity);
   const base64Image = productImage.toString("base64");
   const insertValues = [
     productName,
@@ -52,6 +55,17 @@ router.post("/add-products", upload.single("productImage"), (req, res) => {
   addProducts(insertValues).then((result) => {
     res.redirect(`/product/${result.insertId}`);
   });
+});
+
+router.post("/deleteProduct", async (req, res) => {
+  let email = req.body.email;
+  await DeteleProduct(email)
+    .then(async (result) => {
+      res.json({ message: "Product removed successfully" });
+    })
+    .catch((err) => {
+      res.json({ message: "cannot remove Product" });
+    });
 });
 
 module.exports = router;

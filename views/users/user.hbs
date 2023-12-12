@@ -1,3 +1,14 @@
 <body>
-    user page
+  {{#each products}}
+    <div></div>
+    {{this.sl}}
+    <div></div>{{this.name}}
+    <div></div>${{this.price}}
+    <div></div><img
+      src="{{this.Image}}"
+      alt="{{this.name}} Image"
+      class="product-image"
+    />
+    <div><a href="">Add to cart</a></div>
+  {{/each}}
 </body>

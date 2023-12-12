@@ -1,5 +1,7 @@
 <body>
   <link rel="stylesheet" href="/stylesheets/admin.css" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="/javascripts/products.js"></script>
   <header class="head">
     <h1>{{user}}</h1><span>ADMIN</span>
     <nav>
@@ -34,7 +36,11 @@
               /></td>
             <td>{{this.quantity}}</td>
             <td>
-              <a href="" class="btn2">Remove</a>
+              <a
+                href=""
+                onclick="deleteproduct(`{{this.id}}`)"
+                class="btn2"
+              >Remove</a>
             </td>
           </tr>
         {{/each}}
